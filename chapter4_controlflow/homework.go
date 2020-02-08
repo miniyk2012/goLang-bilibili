@@ -12,7 +12,7 @@ func printMulTable(n int) {
 
 func printLine(line int) {
 	for i := 1; i <= line; i++ {
-		fmt.Printf("%d*%d=%2d ", i, line, line * i)
+		fmt.Printf("%d*%d=%-2d ", i, line, line * i)
 	}
 }
 
