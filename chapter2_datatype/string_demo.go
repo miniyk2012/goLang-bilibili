@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -27,6 +28,7 @@ func bytePrint() {
 }
 
 func traversalString(s string) {
+	fmt.Println("len(s) =", len(s))
 	for i := 0; i < len(s); i++ {
 		fmt.Printf("%v(%c) ", s[i], s[i])
 	}
@@ -36,8 +38,25 @@ func traversalString(s string) {
 		fmt.Printf("%v(%c) ", v, v)
 	}
 	fmt.Println()
-
 }
+
+func changeString(s string) {
+	byteS1 := []byte(s)
+	byteS1[0] = 'w'
+	fmt.Println(string(byteS1))
+
+	runeS := []rune(s)
+	runeS[0] = '哦'
+	fmt.Println(string(runeS))
+}
+
+func sqrtDemo() {
+	var a, b = 3, 4
+	var c int
+	c = int(math.Sqrt(float64(a*a + b*b)))
+	fmt.Println("c = ", c)
+}
+
 func main() {
 	printSth()
 	fmt.Println()
@@ -45,5 +64,10 @@ func main() {
 	fmt.Println()
 	bytePrint()
 	fmt.Println()
-	traversalString("hello world, 你好")
+	traversalString("hi, 你好")
+	println()
+	changeString("hi, 你好")
+	changeString("喂, 你好")
+	println()
+	sqrtDemo()
 }
