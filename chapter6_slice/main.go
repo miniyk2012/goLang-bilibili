@@ -80,12 +80,15 @@ func printCmpNil() {
 
 func sliceMethod() {
 	var a [8]int
-	fmt.Printf("len(a)=%d, cap(a)=%d, ptr(a)=%p, ptr(a[0])=%p\n", len(a), cap(a), &a, &a[0])
+	fmt.Printf("%v, len(a)=%d, cap(a)=%d, ptr(a)=%p, ptr(a[0])=%p\n", a, len(a), cap(a), &a, &a[0])
 	numSlice := a[:0]
 	for i := 0; i < 10; i++ {
 		numSlice = append(numSlice, i)
 		fmt.Printf("len(numSlice)=%d, cap(numSlice)=%d, ptr(underlyArray)=%p, ptr(numSlice[0])=%p\n", len(numSlice), cap(numSlice), numSlice, &numSlice[0])
 	}
+	fmt.Printf("%v, len(a)=%d, cap(a)=%d, ptr(a)=%p, ptr(a[0])=%p\n", a, len(a), cap(a), &a, &a[0])
+	println()
+
 	numSlice = numSlice[:cap(numSlice)]
 	fmt.Println(numSlice)
 	var citySlice []string
