@@ -24,19 +24,18 @@ var (
 )
 
 func rules(name string) (num int) {
-	countChar := func(char string) (count int) {
+	countChar := func(char rune) (count int) {
 		for _, c := range name {
-			fmt.Println(string(c))
-			if char == string(c) {
+			if char == c {
 				count++
 			}
 		}
 		return count
 	}
-	num += countChar("e") + countChar("E")
-	num += 2 *  (countChar("i") + countChar("I"))
-	num += 3 * (countChar("o") + countChar("O"))
-	num += 4 * (countChar("u") + countChar("U"))
+	num += countChar('e') + countChar('E')
+	num += 2 * (countChar('i') + countChar('I'))
+	num += 3 * (countChar('o') + countChar('O'))
+	num += 4 * (countChar('u') + countChar('U'))
 
 	return
 }
