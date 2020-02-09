@@ -27,6 +27,7 @@ func sliceDemo() {
 }
 
 type Callback func(interface{})
+type mass int
 
 func printSliceLenCapCallback(a interface{}, callback Callback) {
 	val := reflect.ValueOf(a)
@@ -130,5 +131,13 @@ func main() {
 	b = removeFrom(b, 2)
 	fmt.Println(a)
 	fmt.Printf("%v, len(b)=%d, cap(b)=%d\n", b, len(b), cap(b))
-
+	println()
+	fmt.Printf("%T\n", Callback(compareToNil))
+	fmt.Printf("%v\n", Callback(compareToNil))
+	fmt.Printf("%T\n", compareToNil)
+	fmt.Printf("%v\n", compareToNil)
+	fmt.Printf("%T\n", mass(5))
+	fmt.Printf("%v\n", mass(5))
+	fmt.Printf("%T\n", 5)
+	fmt.Printf("%v\n", 5)
 }
