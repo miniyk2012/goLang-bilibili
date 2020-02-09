@@ -56,6 +56,14 @@ func equalDemo() {
 
 }
 
+func assignArray() {
+	a := [...]int{1, 2, 3}
+	b := a // 复制赋值
+	a[0] = 10
+	fmt.Println(a)
+	fmt.Println(b)
+}
+
 func main() {
 	arrayDemo()
 	println()
@@ -66,4 +74,6 @@ func main() {
 	fmt.Println(a)
 	println()
 	equalDemo()
+	println()
+	assignArray()
 }
