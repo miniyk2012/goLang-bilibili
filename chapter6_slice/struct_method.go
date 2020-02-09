@@ -30,6 +30,6 @@ func main() {
 	sam := Employee{Human{"Sam", 45, "111-888-XXXX"}, "Golang Inc"}
 	sam.SayHi()
 	sam.Human.SayHi()    // calls Human.SayHi
-	sam.SayHello()       // calls Human.SayHello
-	sam.Human.SayHello() // calls Human.SayHello
+	sam.SayHello()       // calls  Human.SayHello
+	sam.Human.SayHello() // calls  Human.SayHello
 }
