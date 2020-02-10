@@ -115,6 +115,18 @@ func pointerReference() {
 	c := b // c虽然是个引用, 但b被复制了一个新的值给c, 因此c不再和b指向同一个对象
 	*ap2 = 10
 	fmt.Printf("b=%d, c=%d\n", b, c)
+
+	println()
+	s := "ABC"
+	ps := &s
+	fmt.Printf("%v\n", *ps) // ABC
+	s = "CDE"
+	fmt.Printf("%v\n", *ps) // CDE
+	o := s
+	*ps = "EFG"
+	fmt.Printf("%v\n", *ps) // EFG
+	fmt.Printf("%v\n", s)   // EFG
+	fmt.Printf("%v\n", o)   // CDE
 }
 
 func main() {
