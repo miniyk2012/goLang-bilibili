@@ -11,7 +11,7 @@ import (
 type Student struct {
 	ID     int `json:"id"`
 	Gender string
-	Name   string
+	name   string // 小写的字段不会被序列化
 }
 
 //Class 班级
@@ -36,7 +36,7 @@ func demo1() {
 	fmt.Printf("%#v, len=%d, cap=%d\n", c.Students, len(c.Students), cap(c.Students))
 	for i := 0; i < 5; i++ {
 		c.Students = append(c.Students, &Student{
-			Name:   fmt.Sprintf("stu%02d", i),
+			name:   fmt.Sprintf("stu%02d", i),
 			Gender: "男",
 			ID:     i,
 		})
