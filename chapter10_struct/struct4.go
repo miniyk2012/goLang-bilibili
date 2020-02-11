@@ -9,7 +9,7 @@ import (
 
 //Student 学生
 type Student struct {
-	ID     int
+	ID     int `json:"id"`
 	Gender string
 	Name   string
 }
