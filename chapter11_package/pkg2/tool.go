@@ -1,7 +1,6 @@
 package pkg2
 
 import "fmt"
-import _ "github.com/miniyk2012/goLang-bilibili/chapter11_package/pkg1"
 
 // 包变量可见性
 
@@ -11,8 +10,9 @@ var a = 100 // 首字母小写，外部包不可见，只能在当前包内使�
 const Mode = 1
 
 func init() {
-	fmt.Printf("pkg2 init: a=%d, Mode=%d", a, Mode)
+	fmt.Printf("a=%d, Mode=%d", a, Mode)
 }
+
 type person struct { // 首字母小写，外部包不可见，只能在当前包内使用
 	name string
 }
@@ -21,7 +21,9 @@ type person struct { // 首字母小写，外部包不可见，只能在当前�
 func Add(x, y int) int {
 	return x + y
 }
-
+func Sub(x, y int) int {
+	return x - y
+}
 func age() { // 首字母小写，外部包不可见，只能在当前包内使用
 	var Age = 18 // 函数局部变量，外部包不可见，只能在当前函数内使用
 	fmt.Println(Age)
