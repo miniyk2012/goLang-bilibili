@@ -72,8 +72,70 @@ func demo2() {
 	fmt.Printf("%#v\n", p3)
 }
 
+type MyInt int
+
+func (i MyInt) SayHello() {
+	fmt.Printf("Hello, I'm %02d\n", i)
+}
+
+func demo3() {
+	i := MyInt(4)
+	i.SayHello()
+	fmt.Printf("%#v  %T\n", i, i) //4  main.MyInt
+}
+
+//Person1 结构体Person1类型
+type Person1 struct {
+	string
+	int
+}
+
+func demo4() {
+	p1 := Person1{
+		"小王子",
+		18,
+	}
+	fmt.Printf("%#v\n", p1)        //main.Person{string:"北京", int:18}
+	fmt.Println(p1.string, p1.int) //北京 18
+}
+
+type Address struct {
+	Province string
+	City     string
+}
+
+func (a *Address) sayHello() {
+	fmt.Printf("Hello, I'm %s\n", a.City)
+}
+
+type User struct {
+	Name    string
+	Gender  string
+	Address Address
+}
+
+func demo5() {
+	user := User{
+		Name:   "杨恺",
+		Gender: "男",
+		Address: Address{
+			City:     "常州",
+			Province: "江苏",
+		},
+	}
+	fmt.Printf("%#v\n", user)
+	fmt.Printf("%s\n", user.Address.City)
+	user.Address.sayHello()
+}
+
 func main() {
 	demo1()
 	println()
 	demo2()
+	println()
+	demo3()
+	println()
+	demo4()
+	println()
+	demo5()
 }
