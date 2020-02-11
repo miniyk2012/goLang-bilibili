@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/aerospike/aerospike-client-go/examples/shared"
-
 	. "github.com/aerospike/aerospike-client-go"
 )
 
@@ -91,10 +89,19 @@ func localDemo() {
 func prodTest() {
 	client := newClient()
 	fmt.Printf("%v\n", *client)
+	recordset, err := client.ScanAll(nil, "test", "demo")
+	panicOnError(err)
+	for res := range recordset.Results() {
+		if res.Err != nil {
+			// handle error; or close the recordset and break
+		}
+		// process record
+		fmt.Println(res.Record)
+	}
 
 }
 func main() {
 	//localDemo()
-	//prodTest()
-	runExample(shared.Client)
+	prodTest()
+	//runExample(shared.Client)
 }

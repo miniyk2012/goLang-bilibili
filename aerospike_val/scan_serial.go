@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"time"
-
 	"github.com/aerospike/aerospike-client-go/examples/shared"
 
 	as "github.com/aerospike/aerospike-client-go"
@@ -28,9 +26,34 @@ func runExample(client *as.Client) {
 
 	for _, node := range nodeList {
 		log.Println("Scan node ", node.GetName())
-		recordset, err := client.ScanNode(policy, node, *shared.Namespace, *shared.Set)
+		recordset, err := client.ScanNode(policy, node, "test", "demo")
 		shared.PanicOnError(err)
-		fmt.Printf("%v\n", *recordset)
+	L:
+		for {
+			select {
+			case rec := <-recordset.Records:
+				if rec == nil {
+					break L
+				}
+				//log.Println(rec.Key)
+				metrics, exists := setMap[rec.Key.SetName()]
+
+				if !exists {
+					metrics = Metrics{}
+				}
+				metrics.count++
+				metrics.total++
+				setMap[rec.Key.SetName()] = metrics
+
+			case err := <-recordset.Errors:
+				// if there was an error, stop
+				shared.PanicOnError(err)
+			}
+		}
+		for k, v := range setMap {
+			log.Println("Node ", node, " set ", k, " count: ", v.count)
+			v.count = 0
+		}
 
 	}
 	end := time.Now()
