@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/aerospike/aerospike-client-go/examples/shared"
 	"log"
 	"time"
-	"github.com/aerospike/aerospike-client-go/examples/shared"
 
 	as "github.com/aerospike/aerospike-client-go"
 )
