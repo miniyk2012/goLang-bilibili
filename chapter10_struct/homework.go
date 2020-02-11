@@ -54,6 +54,25 @@ func saveStudents() {
 		fmt.Println(k, "=>", v.name)
 	}
 	fmt.Println(students)
+
+	println()
+	students2 := []*student{
+		&student{name: "小王子", age: 18},
+		&student{name: "娜扎", age: 23},
+		&student{name: "大王八", age: 9000},
+	}
+	for _, v := range students2 {
+		m[v.name] = v
+	}
+	for k, v := range m {
+		fmt.Println(k, "=>", v.name)
+	}
+
+	println()
+	students2[0].name = "杨恺"
+	for k, v := range m {
+		fmt.Println(k, "=>", v.name)
+	}
 }
 
 func main() {
