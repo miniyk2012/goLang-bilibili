@@ -2,6 +2,8 @@ package main
 
 import (
 	as "github.com/aerospike/aerospike-client-go"
+	"os"
+	"log"
 )
 
 // This is only for this example.
@@ -22,7 +24,26 @@ func newClient() *as.Client {
 func main() {
 	//localDemo()
 	//runExample(shared.Client)
-
+	people_type := os.Args[1]
+	tuid := os.Args[2]
+	log.Printf("type=%s, tuid=%s", people_type, tuid)
+	users := []string{tuid}
+	switch people_type {
+	case "cvr":
+		scanCvr(users)
+	case "user":
+		scanUsers(users)
+	case "click":
+		scanClick(users)
+	case "show":
+		scanShow(users)
+	case "version":
+		scanVersions(users)
+	case "emptyTag":
+		emptyTag(tuid)
+	default:
+		log.Printf("%s not support", people_type)
+	}
 	//scanAllUser()
 	//log.Println("---------------------------------------------------------------------------")
 	//scanAllVersion()
@@ -32,8 +53,4 @@ func main() {
 	//scanAllBehaviors("show")
 	//log.Println("---------------------------------------------------------------------------")
 	//scanAllBehaviors("cvr")
-	//scanUsers([]string{"--ktYSAvQWekDQUFGC21Sg"})
-	//scanClick([]string{"--DWyUnie5wxFwJdeMIuag"})
-	scanCvr([]string{"-02r0bcUQ92QCYU7dM_S1A"})
-	//scanShow([]string{"-ggHtd993qKScx93HieoRQ"})
 }
