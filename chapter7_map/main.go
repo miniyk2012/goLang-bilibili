@@ -147,6 +147,90 @@ func sliceMap() {
 	fmt.Printf("%p\n", s)
 }
 
+// golang 切片和struct的赋值为值拷贝，map为引用拷贝。
+func assignDemo() {
+	l := make([]int64, 0)
+	l = append(l, 10)
+	l1 := l
+	l1 = append(l1, 20)
+	fmt.Println(l, l1) //[10] [10 20]
+	l1[0] = 50
+	fmt.Println(l, l1) //[10] [50 20]
+
+	println()
+	l2 := make([]int64, 0, 5)
+	l2 = append(l2, 10)
+	l3 := l2
+	l3 = append(l3, 20)
+	fmt.Println(l2, l3) //[10] [10 20]
+	l3[0] = 50
+	fmt.Println(l2, l3) //[50] [50 20]
+}
+
+func assignDemo2(alloc int) {
+	m := make(map[string]interface{}, 5)
+	l := make([]int64, 0, alloc)
+	m["hello"] = l
+	l = append(l, 1)
+	fmt.Println(m["hello"]) //[]
+	capacity := cap(m["hello"].([]int64))
+	fmt.Println(m["hello"].([]int64)[:capacity]) // 这个不好说啦
+}
+
+func assignDemo3() {
+	m := make(map[string]interface{}, 0)
+	l := map[string]interface{}{
+		"hello": "hi",
+	}
+	m["hello"] = l
+	l["hi"] = 1
+	fmt.Println(m["hello"]) //map[hello:hi hi:1]
+}
+
+type A struct {
+	B int
+}
+
+func assignDemo4() {
+	m := make(map[string]interface{}, 0)
+	a := &A{1}
+	m["hello"] = a
+	a.B = 4
+	fmt.Println(*(m["hello"].(*A))) //{4}
+	m["hello"].(*A).B = 6
+	fmt.Println(*(m["hello"].(*A))) //{6}
+	fmt.Println(*a)                 //{6}
+
+	println()
+	m1 := make(map[string]interface{}, 0)
+	l := make([]int64, 0)
+	m1["hello"] = &l
+	l = append(l, 10)
+	fmt.Println(m1["hello"])
+}
+
+func sliceModify(l []int) {
+	l[0] = 100
+}
+
+func demo5() {
+	l := []int{1, 2, 3}
+	sliceModify(l)
+	fmt.Println(l)
+}
+
+func pointerToSlice() {
+	slice := []string{"a", "a"}
+
+	func(slice *[]string) {
+		(*slice)[0] = "b"
+		(*slice)[1] = "b"
+		*slice = append(*slice, "a")
+		fmt.Println(*slice)
+	}(&slice)
+	fmt.Println(slice)
+}
+
 func main() {
 	mapDemo1()
 	println()
@@ -159,4 +243,18 @@ func main() {
 	mapSlice()
 	println()
 	sliceMap()
+	println()
+	assignDemo()
+	println()
+	assignDemo2(0)
+	println()
+	assignDemo2(3)
+	println()
+	assignDemo3()
+	println()
+	assignDemo4()
+	println()
+	demo5()
+	println()
+	pointerToSlice()
 }
