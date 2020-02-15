@@ -69,8 +69,35 @@ func demo2() {
 	printMethod(stu)
 }
 
+type Flyer interface {
+	Fly() string
+}
+
+type Bird struct {
+}
+func (b Bird) Fly() string {
+	return "bird Fly"
+}
+
+func checkFly() {
+	stu := student{
+		Name:  "小王子",
+		Score: 90,
+	}
+	var i interface{} = stu
+	if v, ok := i.(Flyer); ok {
+		fmt.Printf("stu implements String(): %s\n", v.Fly()) // note: v, not i
+	}
+
+	i = Bird{}
+	if v, ok := i.(Flyer); ok {
+		fmt.Printf("bird implements String(): %s\n", v.Fly()) // note: v, not i
+	}
+}
 func main() {
 	demo1()
 	println()
 	demo2()
+	println()
+	checkFly()
 }
