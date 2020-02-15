@@ -62,7 +62,7 @@ func (parser *ConfigParser) Get(sectionName, optionName string) string {
 			return val
 		}
 	}
-	panic("")
+	panic("Get Error!")
 }
 
 func (parser *ConfigParser) GetSectionNames() (sections []string) {
@@ -118,4 +118,6 @@ func main() {
 		}
 		println()
 	}
+
+	fmt.Println(configParser.Get("LogonInfo", "DBServer"))
 }
