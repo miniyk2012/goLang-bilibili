@@ -6,8 +6,8 @@ import (
 )
 
 type student struct {
-	Name  string `json:"name"`
-	Score int    `json:"score"`
+	Name  string `json:"name" ini:"value"`
+	Score int    `json:"score" ini:"xx"`
 	value int
 }
 
@@ -23,6 +23,10 @@ func (s student) Sleep() string {
 	return msg
 }
 
+func (s  student) Eat(food string) {
+	fmt.Printf("eat %s\n", food)
+}
+
 func demo1() {
 	var s  student
 	t := reflect.TypeOf(s)
@@ -35,10 +39,38 @@ func demo1() {
 	}
 	// 通过字段名获取指定结构体字段信息
 	if scoreField, ok := t.FieldByName("Score"); ok {
-		fmt.Printf("name:%s index:%d type:%v json tag:%v\n", scoreField.Name, scoreField.Index, scoreField.Type, scoreField.Tag.Get("json"))
+		fmt.Printf("name:%s index:%d type:%v json tag:%v, ini tag:%v\n",
+			scoreField.Name, scoreField.Index, scoreField.Type, scoreField.Tag.Get("json"), scoreField.Tag.Get("ini"))
 	}
+}
+
+func printMethod(x interface{}) {
+	t := reflect.TypeOf(x)
+	v := reflect.ValueOf(x)
+	fmt.Println(t.NumMethod())
+	fmt.Println(v.NumMethod())
+	for i := 0; i < v.NumMethod(); i++ {
+		fmt.Printf("%s, %s, %s\n", t.Method(i).Name, t.Method(i).Type, v.Method(i).Type())
+	}
+	// 通过反射调用方法传递的参数必须是 []reflect.Value 类型
+	var arg = []reflect.Value{}
+	v.Method(1).Call(arg)
+
+	v.MethodByName("Study").Call(nil)
+	eatFunc := v.MethodByName("Eat")
+	eatFunc.Call([]reflect.Value{reflect.ValueOf("狗屎")})
+}
+
+func demo2() {
+	stu := student{
+		Name:  "小王子",
+		Score: 90,
+	}
+	printMethod(stu)
 }
 
 func main() {
 	demo1()
+	println()
+	demo2()
 }
