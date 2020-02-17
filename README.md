@@ -4,4 +4,6 @@
 
 视频: https://space.bilibili.com/4638193/channel/detail?cid=66016
 
+作者github仓库: https://github.com/Q1mi/go_tutorial
+
 
