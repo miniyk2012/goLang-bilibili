@@ -139,14 +139,17 @@ func homework2() {
 	fileLogger := newFileLogger("log.txt")
 	logger = fileLogger
 	defer logger.Close()
-	logger.Info("Hello")
-	logger.Info("how are you")
+	for i:=0; i<100; i++ {
+		logger.Info(fmt.Sprintf("Hello%d", i))
+	}
+
 
 	consoleLogger := newConsoleLogger()
 	logger = consoleLogger
 	defer logger.Close()
-	logger.Info("Hello")
-	logger.Info("how are you")
+	for i:=0; i<100; i++ {
+		logger.Info(fmt.Sprintf("Hello%d", i))
+	}
 }
 
 func main() {
