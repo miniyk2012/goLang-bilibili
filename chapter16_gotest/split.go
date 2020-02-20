@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"strings"
+	"github.com/miniyk2012/goLang-bilibili/handles"
+	"github.com/gin-gonic/gin"
 )
+
 func Split(s, sep string) (result []string) {
 	seqLength := len(sep)
 	i := strings.Index(s, sep)
@@ -17,10 +19,6 @@ func Split(s, sep string) (result []string) {
 }
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+	r.GET("/ping", handlers.Ping)
+	r.Run() // listen and serve on 0.0.0.0:8080
 }
