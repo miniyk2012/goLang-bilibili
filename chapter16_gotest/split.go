@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/miniyk2012/goLang-bilibili/handles"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/miniyk2012/goLang-bilibili/chapter16_gotest/handles"
 )
 
 func Split(s, sep string) (result []string) {
