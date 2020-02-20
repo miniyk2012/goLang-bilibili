@@ -1,9 +1,9 @@
 package main
 
 import (
-	"strings"
-	"github.com/miniyk2012/goLang-bilibili/handles"
 	"github.com/gin-gonic/gin"
+	"github.com/miniyk2012/goLang-bilibili/handles"
+	"strings"
 )
 
 func Split(s, sep string) (result []string) {
@@ -19,6 +19,6 @@ func Split(s, sep string) (result []string) {
 }
 func main() {
 	r := gin.Default()
-	r.GET("/ping", handlers.Ping)
+	r.GET("/ping", handles.Ping)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
