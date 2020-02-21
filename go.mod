@@ -9,4 +9,5 @@ require (
 	go4.org v0.0.0-20200104003542-c7e774b10ea0 // indirect
 	golang.org/x/build v0.0.0-20200220153757-b077d0cce971 // indirect
 	golang.org/x/net v0.0.0-20200219183655-46282727080f // indirect
+	golang.org/x/tools v0.0.0-20200117161641-43d50277825c
 )
