@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func parse() {
+func parseTime() {
 	now := time.Now()
 	fmt.Println(now)
 	// 加载时区
@@ -25,6 +25,14 @@ func parse() {
 	fmt.Println(timeObj.Sub(now))
 }
 
+func createTimeDemo() {
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	timeObj := time.Date(1989, 3, 15, 22, 30, 0, 0, loc)
+	fmt.Println(timeObj)
+}
+
 func main() {
-	parse()
+	parseTime()
+	println()
+	createTimeDemo()
 }
