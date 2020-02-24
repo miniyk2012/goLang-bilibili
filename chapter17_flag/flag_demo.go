@@ -23,4 +23,8 @@ func main() {
 	fmt.Println(flag.NArg())
 	//返回使用的命令行参数个数
 	fmt.Println(flag.NFlag())
+	// go run flag_demo.go -name=知道 kkjj jhhl ljklk -age=18
+	for i:=0; i<flag.NArg(); i++ {
+		fmt.Printf("flag.Arg(%d)=%s\n", i, flag.Arg(i))
+	}
 }

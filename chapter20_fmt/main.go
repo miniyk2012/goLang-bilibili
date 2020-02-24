@@ -15,6 +15,7 @@ func demo1() {
 func writeToFile() {
 	fmt.Fprintln(os.Stdout, "向标准输出写入内容")
 	fileObj, err := os.OpenFile("./xx.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	defer fileObj.Close()
 	if err != nil {
 		fmt.Println("打开文件出错，err:", err)
 		return
