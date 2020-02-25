@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	written, err := CopyFile("./dst.txt", "./src.txt")
+	written, err := CopyFile("./dst.txt", "./tools.go")
 	if err != nil {
 		fmt.Println(err)
 		return

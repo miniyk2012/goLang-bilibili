@@ -27,6 +27,8 @@ func readThenWrite(writer *bufio.Writer, ch <-chan string) (written int64) {
 	return
 }
 
+// 实现一个拷贝文件函数, 这里用管道实现
+// 有更简便的方法: https://www.liwenzhou.com/posts/Go/go_file/#autoid-4-0-0
 func CopyFile(dstName, srcName string) (written int64, err error) {
 	srcFile, err := os.Open(srcName)
 	if err != nil {
