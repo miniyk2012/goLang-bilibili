@@ -1,13 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
+func homework1() {
 	written, err := CopyFile("./dst.txt", "./tools.go")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Println("write characters:", written)
+}
+
+func main() {
+	Cat()
 }
 
