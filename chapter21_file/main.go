@@ -78,9 +78,40 @@ func readWholeFile() {
 }
 
 func writeDemo1() {
-	//file, err := os.OpenFile("xx.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666)
-
+	file, err := os.OpenFile("xx1.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666)
+	if err != nil {
+		fmt.Println("open file failed, err:", err)
+		return
+	}
+	defer file.Close()
+	str := "hello 沙河"
+	file.Write([]byte(str))
+	file.WriteString(str)
 }
+
+func writeDemo2() {
+	file, err := os.OpenFile("xx2.txt", os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0666)
+	if err != nil {
+		fmt.Println("open file failed, err:", err)
+		return
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	for i:=0; i<10; i++ {
+		writer.WriteString("hello 沙河")  //将数据先写入缓存
+	}
+	writer.Flush()  //将缓存中的内容写入文件
+}
+
+func writeDemo3() {
+	str := "ahello 沙河a"
+	err := ioutil.WriteFile("./xx3.txt", []byte(str), 0666)
+	if err != nil {
+		fmt.Println("open file failed, err:", err)
+		return
+	}
+}
+
 func main() {
 	demo1()
 	println()
@@ -89,4 +120,10 @@ func main() {
 	bufioDemo()
 	println()
 	readWholeFile()
+	println()
+	writeDemo1()
+	println()
+	writeDemo2()
+	println()
+	writeDemo3()
 }
