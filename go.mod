@@ -3,11 +3,10 @@ module github.com/miniyk2012/goLang-bilibili
 go 1.13
 
 require (
-	cloud.google.com/go/storage v1.5.0 // indirect
 	github.com/gin-gonic/gin v1.5.0
+	github.com/golang/protobuf v1.3.3 // indirect
+	github.com/kr/pretty v0.1.0 // indirect
 	github.com/thoas/go-funk v0.5.0
-	go4.org v0.0.0-20200104003542-c7e774b10ea0 // indirect
-	golang.org/x/build v0.0.0-20200220153757-b077d0cce971 // indirect
-	golang.org/x/net v0.0.0-20200219183655-46282727080f // indirect
-	golang.org/x/tools v0.0.0-20200117161641-43d50277825c
+	golang.org/x/sys v0.0.0-20200202164722-d101bd2416d5 // indirect
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 )
