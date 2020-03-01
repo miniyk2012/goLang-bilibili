@@ -2,9 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/chapter16_gotest/golang.org/x/net" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/chapter16_gotest/golang.org/x/tools" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/chapter16_gotest/golang.org/x/xerrors" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/golang.org/x/net" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/golang.org/x/tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/golang.org/x/xerrors" vcs="Git" />
   </component>
 </project>
