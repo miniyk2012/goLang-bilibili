@@ -21,27 +21,6 @@ func (d Data) String() string {
 	return fmt.Sprintf("sum(%d)=%d, worker=%d", d.num, d.total, d.routine)
 }
 
-func generate(job chan<- int64) {
-	for i := 0; i < NUM; i++ {
-		job <- rand.Int63n(1000)
-	}
-	close(job)
-}
-
-func calculate(job <-chan int64, result chan<- Data, jobNo int) {
-	for num := range job {
-		total := calNumSum(num)
-		result <- Data{num, total, jobNo}
-	}
-}
-
-func printResults(result <-chan Data) {
-	for i := 0; i < NUM; i++ {
-		data := <-result
-		fmt.Printf("%d: %v\n", i, data)
-	}
-}
-
 func calNumSum(num int64) int64 {
 	var ret int64
 	for num > 0 {
@@ -52,14 +31,38 @@ func calNumSum(num int64) int64 {
 }
 
 func homework1() {
-	jobChan := make(chan int64)
-	resultChan := make(chan Data)
-	for i := 0; i < WORKER; i++ {
-		go calculate(jobChan, resultChan, i)
-	}
-	go generate(jobChan)
+	var wg1 sync.WaitGroup
+	jobs := make(chan int64)
 
-	printResults(resultChan)
+	go func() {
+		for i := 0; i < NUM; i++ {
+			jobs <- rand.Int63n(1000)
+		}
+		close(jobs)
+	}()
+
+	results := make(chan Data)
+	wg1.Add(WORKER)
+	go func() {
+		wg1.Wait()
+		close(results)
+	}()
+
+	for i := 0; i < WORKER; i++ {
+		go func(i int) {
+			defer wg1.Done()
+			for num := range jobs {
+				total := calNumSum(num)
+				results <- Data{num, total, i}
+			}
+		}(i)
+	}
+
+	var line int
+	for data := range results {
+		fmt.Printf("%d: %v\n", line, data)
+		line++
+	}
 }
 
 // 使用接口的方式实现一个既可以往终端写日志也可以往文件写日志的简易日志库。
@@ -82,7 +85,6 @@ func (fl *FileLogger) Close() {
 	fl.wg.Wait()
 	fmt.Println("fileLogger closed")
 }
-
 
 func (fl *FileLogger) Info(msg string) {
 	fl.wg.Add(1)
@@ -139,15 +141,14 @@ func homework2() {
 	fileLogger := newFileLogger("log.txt")
 	logger = fileLogger
 	defer logger.Close()
-	for i:=0; i<100; i++ {
+	for i := 0; i < 100; i++ {
 		logger.Info(fmt.Sprintf("Hello%d", i))
 	}
-
 
 	consoleLogger := newConsoleLogger()
 	logger = consoleLogger
 	defer logger.Close()
-	for i:=0; i<100; i++ {
+	for i := 0; i < 100; i++ {
 		logger.Info(fmt.Sprintf("Hello%d", i))
 	}
 }
