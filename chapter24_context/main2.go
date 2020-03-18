@@ -74,7 +74,7 @@ LOOP:
 		fmt.Println("db connecting ...")
 		time.Sleep(time.Millisecond * 10) // 假设正常连接数据库耗时10毫秒
 		select {
-		case <-ctx.Done():
+		case <-ctx.Done():  // 若超时就退出该goroutine
 			break LOOP
 		default:
 		}
