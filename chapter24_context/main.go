@@ -43,6 +43,7 @@ func worker3(ctx context.Context) {
 		time.Sleep(time.Second * 1)
 		select {
 		case <-ctx.Done():
+			fmt.Printf("worker3 %v\n", ctx.Err())
 			return
 		default:
 		}
@@ -56,6 +57,7 @@ func worker4(ctx context.Context) {
 		time.Sleep(time.Second * 1)
 		select {
 		case <-ctx.Done():
+			fmt.Printf("worker4 %v\n", ctx.Err())
 			return
 		default:
 		}
